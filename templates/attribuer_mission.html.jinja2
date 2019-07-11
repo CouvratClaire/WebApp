@@ -1,0 +1,43 @@
+{% extends "layout.html.jinja2" %}
+
+<header>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</header>
+
+{% block body %}
+<p> Choisissez un ingénieur d'étude pour réaliser la mission {{ name }} parmi les suivants : </p>
+<div class="container">
+      <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Choisir un employé</div>
+        <div class="card-body">
+    <form  action="/process_attribution_form/{{ project_id }}" method="post">
+     <div class="form-group">
+
+
+    <select name="id_select" class="form-control" id="exampleFormControlSelect1">
+{% for employee in employees_wish %}
+
+
+      <option value="{{ employee.id}}">{{ employee.firstname }} {{ employee.lastname }} (voeux) </option>
+
+
+
+{% endfor %}
+
+    {% for employee in employees_comp %}
+
+      <option value="{{ employee.id}}">{{ employee.firstname }} {{ employee.lastname }} (compétences) </option>
+
+
+
+{% endfor %}
+      </select>
+  </div>
+     <input type=submit>
+</form>
+        </div>
+
+      </div>
+    </div>
+
+{% endblock %}

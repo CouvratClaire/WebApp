@@ -1,0 +1,110 @@
+{% extends "layout.html.jinja2" %}
+{% block body %}
+
+    <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-primary o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <img src="{{ url_for("static", filename="img/new-user.png") }}" alt="Nouveau" height="42" width="42">
+                  </div>
+                  <div class="mr-5">Ajouter un ingénieur d'étude</div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="{{ url_for('generate_for_new_employee')}}">
+                  <span class="float-left">Ajouter</span>
+                  <span class="float-right">
+                    <img src="{{ url_for("static", filename="img/new-user_black.png") }}" alt="Nouveau" height="22" width="22">
+                  </span>
+                </a>
+              </div>
+            </div>
+    </div>
+
+          <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <img src="{{ url_for("static", filename="img/coder-head_black.png") }}" alt="Etude" height="22" width="22">
+              Ingénieurs d'étude</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Prénom</th>
+                      <th>Nom</th>
+                      <th>Mission </th>
+                      <th>Voir le profil</th>
+                        <th>Voeux</th>
+                      <th>Supprimer</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {% for employee in employees %}
+                        <tr>
+                         <td>{{ employee.firstname }} </td>
+                            <td>{{ employee.lastname }} </td>
+                            <td> {% for project in projects  %}
+                                {% if project.id==employee.project %}
+                                 {{ project.name }}
+                                {% endif %}
+                                {% endfor %} </td>
+
+                            <td> <a href="/profilEtude/{{ employee.id }}"> Profil </a></td>
+                            <td> {% if  employee.wish  == None or employee.wish=="null" %} Aucun voeux {% else %} {% for project in projects %} {% if project.id==employee.wish %} {{ project.name }} {% endif %} {% endfor %} {% endif %}</td>
+                            <td> <a href="/supprimerEtude/{{employee.id}}"> Supprimer </a> </td>
+                         </tr>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Your Website 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}

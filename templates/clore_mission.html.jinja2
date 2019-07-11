@@ -1,0 +1,23 @@
+{% extends "layout.html.jinja2" %}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+{% block body %}
+
+    <div class="alert alert-danger" role="alert">
+  Voulez-vous clore la mission {{ name }} ?
+</div>
+
+    <a href="/process_close_mission/{{ project_id }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Oui</a>
+<a href="{{ url_for('accueil_affaire')}}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Annuler</a>
+
+
+
+
+
+
+
+
+{% endblock %}

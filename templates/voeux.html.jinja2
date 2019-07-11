@@ -1,0 +1,30 @@
+{% extends "layout2.html.jinja2" %}
+
+{% block body %}
+
+    <p> Choisissez une mission qui vous intéresse parmi les suivantes : </p>
+<div class="container">
+      <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Choisir une mission</div>
+        <div class="card-body">
+
+    <form  action="/process_wish_form/{{ identifiant }}" method="post">
+
+    <select name="id_select" class="form-control" id="exampleFormControlSelect1">
+    {# afficher les projets qui ont les competences #}
+    {% for proj_ in proj %}
+
+ <option value="{{proj_.id}}">{{ proj_.name }} {{ proj_.description }} </option>
+
+    {% endfor %}
+            {# lien pour emettre le voeux #}
+
+     </select>
+
+     <input type=submit>
+</form>
+        </div>
+      </div>
+</div>
+
+{% endblock %}

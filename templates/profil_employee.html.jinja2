@@ -1,0 +1,92 @@
+{% extends "layout.html.jinja2" %}
+{% block body %}
+
+  <div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Modifier</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">{{ firstname }}  {{ name }}</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Identifiant :</h6>
+                            <p>
+                                {{ identifiant }}
+                            </p>
+                            <h6> Nombre de missions effectuées :</h6>
+                            <p>
+                                {{ employee_nb }}
+                            </p>
+                            <h6> Compétences :</h6>
+                            <ul> {% for competence in employee.competences %}
+                                    <li> {{ competence.name }} </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Voeu effectué</h6>
+                            <a href="#" class="badge badge-dark badge-pill">{{ voeux }}</a>
+
+
+                        </div>
+                        <div class="col-md-12">
+                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Mission en cours ou réalisées</h5>
+                            <table class="table table-sm table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <strong>{{ project_name }}</strong> : <strong>{{ description }} .Etat : {{ project_state }}</strong>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+
+                <div class="tab-pane" id="edit">
+                    <form action="{{ url_for("process_modification_employee_function") }}" method="post">
+
+                        <input name="identifiant" type="hidden" value="{{ identifiant }}">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Prénom</label>
+                            <div class="col-lg-9">
+                                <input name="firstname" type="text" placeholder="firstname" value="{{ firstname }}"
+                                       required="required" autofocus="autofocus"></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Nom</label>
+                            <div class="col-lg-9">
+                                <input name="lastname" type="text" placeholder="lastname" required="required"
+                                       value="{{ name }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input type="reset" class="btn btn-secondary" value="Annuler">
+                                <input type=submit class="btn btn-primary" value="Sauvegarder">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+    </div>
+    </div>
+
+{% endblock %}
